@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define ROOM_SIZE 20
+#define ROOM_SIZE 21
 
 int solve(int w, int h, char tiles[][ROOM_SIZE], int x, int y) {
   if (x < 0 || w <= x || y < 0 || h <= y) return 0;
