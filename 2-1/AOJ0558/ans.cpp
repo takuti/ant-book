@@ -6,20 +6,20 @@
 
 typedef std::pair<int, int> point;
 
-int get_distance(int sx, int sy, int goal,
+int get_time(int sx, int sy, int goal,
                  int h, int w, char map[][MAP_SIZE_MAX],
                  int *gx, int *gy) {
   std::queue<point> queue;
   queue.push(point(sx, sy));
 
-  // initalize distance array
-  int distance[MAP_SIZE_MAX][MAP_SIZE_MAX];
+  // initalize time array
+  int time[MAP_SIZE_MAX][MAP_SIZE_MAX];
   for (int i = 0; i < MAP_SIZE_MAX; i++) {
     for (int j = 0; j < MAP_SIZE_MAX; j++) {
-      distance[i][j] = INF;
+      time[i][j] = INF;
     }
   }
-  distance[sx][sy] = 0;
+  time[sx][sy] = 0;
 
   // 幅優先探索
   while (true) {
@@ -32,7 +32,7 @@ int get_distance(int sx, int sy, int goal,
     if (map[x][y] == goal + '0') {
       *gx = x;
       *gy = y;
-      return distance[x][y];
+      return time[x][y];
     }
 
     // 4 方向に進む
@@ -41,9 +41,9 @@ int get_distance(int sx, int sy, int goal,
       int _x = x + d[i];
       int _y = y + d[i + 1];
       if (map[_x][_y] != 'X' &&
-          distance[_x][_y] == INF &&
+          time[_x][_y] == INF &&
           0 <= _x && _x < h && 0 <= _y && _y < w) {
-        distance[_x][_y] = distance[x][y] + 1;
+        time[_x][_y] = time[x][y] + 1;
         queue.push(point(_x, _y));
       }
     }
@@ -64,7 +64,7 @@ int solve(int h, int w, int n, char map[][MAP_SIZE_MAX]) {
 
   int result = 0;
   for (int i = 1; i <= n; i++) {
-    result += get_distance(sx, sy, i, h, w, map, &gx, &gy);
+    result += get_time(sx, sy, i, h, w, map, &gx, &gy);
 
     // ゴール位置が次のスタート位置
     sx = gx;
