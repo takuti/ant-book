@@ -58,6 +58,7 @@ int solve(int h, int w, int n, char map[][MAP_SIZE_MAX]) {
       if (map[i][j] == 'S') {
         sx = i;
         sy = j;
+        break;
       }
     }
   }
