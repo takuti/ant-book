@@ -4,18 +4,16 @@ const int N_BALL = 10;
 
 int balls[N_BALL];
 
-bool solve(int l[], int l_top, int r[], int r_top) {
-  int bi = (l_top + 1) + (r_top + 1);
+bool solve(int l_top, int r_top, int n) {
+  if (n == N_BALL) return true;
 
-  if (bi == N_BALL) return true;
+  int l_top_ = balls[n];
+  if (l_top > l_top_) return false;
+  if (solve(l_top_, r_top, n+1)) return true;
 
-  l[l_top+1] = balls[bi];
-  if (l_top >= 0 && l[l_top] > l[l_top+1]) return false;
-  if (solve(l, l_top+1, r, r_top)) return true;
-
-  r[r_top+1] = balls[bi];
-  if (r_top >= 0 && r[r_top] > r[r_top+1]) return false;
-  if (solve(l, l_top, r, r_top+1)) return true;
+  int r_top_ = balls[n];
+  if (r_top > r_top_) return false;
+  if (solve(l_top, r_top_, n+1)) return true;
 
   return false;
 }
@@ -27,8 +25,7 @@ int main() {
   for (int i = 0; i < N; i++) {
     for (int bi = 0; bi < N_BALL; bi++) scanf("%d", &balls[bi]);
 
-    int left[N_BALL] = {}, right[N_BALL] = {};
-    if (solve(left, -1, right, -1)) printf("YES\n");
+    if (solve(-1, -1, 0)) printf("YES\n");
     else printf("NO\n");
   }
 
