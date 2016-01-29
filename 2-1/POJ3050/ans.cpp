@@ -18,8 +18,8 @@ int solve() {
 
   for (int i = 1; i <= 5; i++) {
     for (int j = 1; j <= 5; j++) {
-      char init_data[] = {grid[i][j]};
-      vector<char> init(init_data, init_data+1);
+      vector<char> init;
+      init.push_back(grid[i][j]);
       P p = {i, j, init};
       que.push(p);
     }
