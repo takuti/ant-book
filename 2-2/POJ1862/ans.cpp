@@ -13,7 +13,6 @@ float solve() {
     if (weights.empty()) return m1;
     float m2 = weights.top(); weights.pop();
     float m_ = COLLIDE(m1, m2);
-    if (weights.empty()) return m_;
     weights.push(m_);
   }
 }
